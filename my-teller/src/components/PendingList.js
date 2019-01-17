@@ -38,6 +38,13 @@ class PendingList extends Component {
   
   componentDidUpdate() {
   //this.checkActive();
+  if (localStorage.getItem('countItem') === 0){
+    // alert("it has");
+   document.getElementsByClassName("serveBtn").display="block";
+  
+ }else{
+   document.getElementsByClassName("serveBtn").display="none";
+ }
   }
   
 
@@ -64,18 +71,15 @@ class PendingList extends Component {
    });
   }
 
+
   componentDidMount() {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);   
-    if (localStorage.getItem('countItem') !== 0){
-       // alert("it has");
-      document.getElementsByClassName("serveBtn").display="none";
-     
-    }else{
-      alert("Nothing")
-    }
+   
   }
 
 
+
+ 
   handleClick = e => {
     const buttonValue = e.target.value;
     console.log(buttonValue);
@@ -116,7 +120,7 @@ class PendingList extends Component {
                     <td className="hidden">{board.STATUS}</td>
 
                 
-                    <td><Link disabled = {this.state.isEnable} to={`/edit/${board.key}/?stat=ACTIVE&queue=${board.QUEUE_NO}`} className="serveBtn btn btn-success" style={{ display: 'none' }}>Serve</Link></td>
+                    <td><Link disabled = {this.state.isEnable} to={`/edit/${board.key}/?stat=ACTIVE&queue=${board.QUEUE_NO}`} className="serveBtn btn btn-success" >Serve</Link></td>
                   </tr>
                 )}
               </tbody>

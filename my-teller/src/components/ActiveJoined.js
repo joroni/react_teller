@@ -74,8 +74,11 @@ function getAllUrlParams(url) {
     
   }
 
+
+  
 class ActiveJoined extends Component {
-  constructor(props) {
+
+    constructor(props) {
     super(props);
     
     this.handleClick = this.handleClick.bind(this);
@@ -87,10 +90,16 @@ class ActiveJoined extends Component {
         QUEUE_DTL: []
       };
 
-     
-      var countItem = this.ref._query.filters.length;
+      
+      var countItem = firebase.firestore().collection('QUEUE_DTL').where("STATUS", "==", "ACTIVE")._query.filters[0];
       console.log(countItem);
-     localStorage.setItem('countItem', countItem);
+      console.log('lkjhgf');
+      if(countItem >= 1 ){
+        localStorage.setItem('countItem', countItem);
+      }else{
+        document.getElementsByClassName("serveBtn").display="none";
+      }
+     
    
  
 
