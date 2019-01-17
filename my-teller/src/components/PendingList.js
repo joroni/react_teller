@@ -11,16 +11,31 @@ import Table from '@material-ui/core/Table';
 class PendingList extends Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
+   // this.handleClick = this.handleClick.bind(this);
     this.ref = firebase.firestore().collection('QUEUE_HDR').where("STATUS", "==", "PENDING").where("BRANCH_CODE", "==", "PBCOM001");
     this.unsubscribe = null;
     this.state = {
       QUEUE_HDR: [],
-      isActive: true
-    
+      isActive: true,
+      id:''
     };
-    this.handleClick = this.handleClick.bind(this);
+   
   }
 
+
+  checkActive(){
+    let ActiveItem = document.querySelector("#ActiveItem tbody tr");
+  if(ActiveItem.rows.length !== 0){
+    alert('Multiple items is not allowed at same time')
+    false();
+    }
+  }
+
+  
+  componentDidUpdate() {
+  this.checkActive();
+  }
   
 
   handleClick() {
@@ -51,6 +66,13 @@ class PendingList extends Component {
   }
 
 
+  handleClick = e => {
+    const buttonValue = e.target.value;
+    console.log(buttonValue);
+    localStorage.setItem("setAs",buttonValue );
+    this.props.history.push("/edit/"+this.props.match.params.id);
+    //some logic
+}
   
 
 
@@ -67,18 +89,18 @@ class PendingList extends Component {
           </div>
           <div class="panel-body">
            <Link to="/create" className="btn btn-primary hidden">Add</Link>
-            <button className="btn btn-primary hidden" onClick={this.handleClick}>
-        {this.state.isActiveOn ? 'PENDING' : 'ACTIVE'}
+            <button className="btn btn-primary hidden">
+        SERVE
       </button>
             <Table id="PendingList" class="table table-stripe">
              
               <tbody>
                 {this.state.QUEUE_HDR.map(board =>
                   <tr className={board.QUEUE_NO}>
-                    <td className="QueueNo"><Link to={`/edit/${board.key}`}>{board.QUEUE_NO}</Link></td>
+                    <td className="QueueNo"><Link className="serveBtn" to={`/edit/${board.key}`}>{board.QUEUE_NO}</Link></td>
                     <td className="hidden">{board.BRANCH_CODE}</td>
                     <td className="hidden">{board.STATUS}</td>
-                    <td><Link to={`/edit/${board.key}`} className="serveBtn btn btn-success" style={{ display: 'none' }}>Serve</Link></td>
+                    <td><Link to={`/edit/${board.key}/?stat=ACTIVE`} className="serveBtn btn btn-success" style={{ display: 'none' }}>Serve</Link></td>
                   </tr>
                 )}
               </tbody>

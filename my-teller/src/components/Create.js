@@ -7,7 +7,7 @@ class Create extends Component {
 
   constructor() {
     super();
-    this.ref = firebase.firestore().collection('boards');
+    this.ref = firebase.firestore().collection('QUEUE_HDR');
     this.state = {
       QUEUE_NO: '',
       BRANCH_CODE: '',
@@ -61,12 +61,13 @@ class Create extends Component {
               </div>
               <div class="form-group">
                 <label for="BRANCH_CODE">BRANCH_CODE:</label>
-                <textArea class="form-control" name="BRANCH_CODE" onChange={this.onChange} placeholder="BRANCH_CODE" cols="80" rows="3">{BRANCH_CODE}</textArea>
+                <input class="form-control" name="BRANCH_CODE" onChange={this.onChange} placeholder="BRANCH_CODE" cols="80" value={BRANCH_CODE} />
               </div>
               <div class="form-group">
                 <label for="STATUS">STATUS:</label>
                 <input type="text" class="form-control" name="STATUS" value={STATUS} onChange={this.onChange} placeholder="STATUS" />
               </div>
+              <Link to="/" class="btn btn-primary">Cancel</Link>
               <button type="submit" class="btn btn-success">Submit</button>
             </form>
           </div>

@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-responsive-modal';
  
-
-
-
-
-
-
-
 class FormDialog extends Component {
 
     

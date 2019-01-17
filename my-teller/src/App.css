@@ -15,6 +15,13 @@ body, html {
   height: 40vmin;
 }
 
+#side-bar {
+  width:250px;
+}
+.container, #mainContainer{
+  min-width: 100%;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -40,6 +47,11 @@ body, html {
 }
 
 
+.serveBtn {
+  max-width:200px;
+  float: right;
+}
+
 
 #root {
   
@@ -47,8 +59,7 @@ body, html {
   height: calc(100vh - 60px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  margin-right: -999px;
-  padding-right: 999px;
+  
   background-color: #f7f7f7;
   opacity: 1 !important;
 
@@ -64,6 +75,6 @@ body, html {
 }
 
 
-#PendingList tbody tr:first-child > td:last-child > a.btn {
+#PendingList tbody tr:first-child > td:last-child > a.btn, #ActiveItem tbody tr:first-child > td:last-child > a.btn{
   display:block !important;
 }

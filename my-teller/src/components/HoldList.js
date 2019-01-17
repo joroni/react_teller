@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import firebase from '../Firebase';
-import Toggle from './Toggle';
-import 'typeface-roboto';
+//import 'typeface-roboto';
 import Icon from '@material-ui/core/Icon';
 import Table from '@material-ui/core/Table';
 
@@ -43,9 +42,6 @@ class HoldList extends Component {
   }
 
 
-  
-
-
  
   // Table data sorting ends....
   render() {
@@ -60,13 +56,12 @@ class HoldList extends Component {
           <div class="panel-body">
             <h4 className="hidden"><Link to="/create" class="btn btn-primary">Add</Link></h4>
             <Table id="PendingList" class="table table-stripe">
-             
               <tbody>
                 {this.state.QUEUE_HDR.map(board =>
                   <tr className={board.QUEUE_NO}>
                     <td><Link to={`/edit/${board.key}`}>{board.QUEUE_NO}</Link></td>
                     <td>{board.BRANCH_CODE}</td>
-                    <td>{board.STATUS} <Toggle /></td>
+                    <td>{board.STATUS} </td>
                   </tr>
                 )}
               </tbody>

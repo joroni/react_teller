@@ -10,12 +10,22 @@ import Table from '@material-ui/core/Table';
 class ActiveList extends Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
     this.ref = firebase.firestore().collection('QUEUE_HDR').where("STATUS", "==", "ACTIVE");
     this.unsubscribe = null;
     this.state = {
       QUEUE_HDR: []
     };
   }
+
+
+  handleClick = e => {
+    const buttonValue = e.target.value;
+    console.log(buttonValue);
+    localStorage.setItem("setAs",buttonValue );
+    this.props.history.push("/edit/"+this.props.match.params.id);
+    //some logic
+}
 
   onCollectionUpdate = (querySnapshot) => {
     const QUEUE_HDR = [];
@@ -33,6 +43,8 @@ class ActiveList extends Component {
       QUEUE_HDR
    });
   }
+
+ 
 
   componentDidMount() {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
@@ -56,7 +68,13 @@ class ActiveList extends Component {
                     <td>{board.QUEUE_NO}</td>
                     <td>{board.BRANCH_CODE}</td>
                     <td>{board.STATUS}</td>
-                    <td><Link to={`/edit/${board.key}`} className="btn btn-success">EDIT</Link></td>
+                    <td>
+                        <Link to={`/edit/${board.key}?stat=DONE`} className="btn btn-success">Done</Link>
+                        <Link to={`/edit/${board.key}?stat=PENDING`} className="btn btn-success" >Return</Link>
+                        <Link to={`/edit/${board.key}?stat=HOLD`} className="btn btn-success" >Hold</Link>
+                        <Link to={`/edit/${board.key}?stat=NOSHOW`} className="btn btn-success" >No Show</Link>
+                      
+                    </td>
                   </tr>
                 )}
               </tbody>
