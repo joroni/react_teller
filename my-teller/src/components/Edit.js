@@ -15,6 +15,7 @@ class Edit extends Component {
     this.handleStatClick = this.handleStatClick.bind(this);
   }
 
+
   
   handleStatClick() {
     this.setState(state => ({
@@ -22,13 +23,26 @@ class Edit extends Component {
     }));
   }
   componentDidMount() {
-   
-
-    function getAllUrlParams(url) {
-
+  
+    getUrlParam();
+    function getUrlParam(parameter, defaultvalue){
+      var urlparameter = defaultvalue;
+      if(window.location.href.indexOf(parameter) > -1){
+          urlparameter = this.getUrlVars()[parameter];
+          }
+          console.log(urlparameter);
+      return urlparameter;
+     
+  }
+    
+ 
+ 
+ 
+  function getAllUrlParams(url) {
+    
       // get query string from url (optional) or window
       var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
-    
+    console.log(queryString);
       // we'll store the parameters here
       var obj = {};
     
@@ -87,7 +101,11 @@ class Edit extends Component {
       }
     
       return obj;
+
+      
     }
+
+
 
 
     
@@ -103,12 +121,13 @@ class Edit extends Component {
           STATUS: board.STATUS
         });
        // alert(this.state.STATUS);
-       let watstatus = getAllUrlParams().stat;
+       let watstatus = getAllUrlParams().stat.toUpperCase();
        //alert(watstatus);
-       this.setState({STATUS:watstatus.toUpperCase()});
-       let toBeSetAs = localStorage.getItem("setAs");
+      // this.setState({STATUS:watstatus.toUpperCase()});
+      this.setState({STATUS:watstatus});
+       /*   let toBeSetAs = localStorage.getItem("setAs");
       
-        //if(this.state.STATUS === 'PENDING'){
+     //if(this.state.STATUS === 'PENDING'){
           if(toBeSetAs === 'ACTIVE' && this.state.STATUS === 'PENDING'){
             // PENDING to ACTIVE
             this.setState({STATUS:'ACTIVE'});
@@ -133,7 +152,7 @@ class Edit extends Component {
           else{
           //this.props.history.push("/");
         }
-        
+        */
       } else {
         console.log("No such document!");
       }
@@ -171,6 +190,8 @@ class Edit extends Component {
     });
   }
 
+
+
   render() {
     return (
       <div class="container">
@@ -185,11 +206,11 @@ class Edit extends Component {
             <form onSubmit={this.onSubmit}>
               <div class="form-group">
                 <label for="title">QUEUE_NO:</label>
-                <input type="text" readOnly class="form-control" name="QUEUE_NO" value={this.state.QUEUE_NO} onChange={this.onChange} placeholder="QUEUE_NO" />
+                <input type="text" readOnlys class="form-control" name="QUEUE_NO" value={this.state.QUEUE_NO} onChange={this.onChange} placeholder="QUEUE_NO" />
               </div>
               <div class="form-group hidden">
                 <label for="BRANCH_CODE">BRANCH_CODE:</label>
-                <input type="text" readOnly class="form-control" name="BRANCH_CODE" value={this.state.BRANCH_CODE} onChange={this.onChange} placeholder="BRANCH_CODE" />
+                <input type="text" readOnlys class="form-control" name="BRANCH_CODE" value={this.state.BRANCH_CODE} onChange={this.onChange} placeholder="BRANCH_CODE" />
               </div>
               <div class="form-group hiddens">
                 <label for="STATUS">STATUS:</label>

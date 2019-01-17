@@ -24,6 +24,7 @@ class ActiveList extends Component {
     console.log(buttonValue);
     localStorage.setItem("setAs",buttonValue );
     this.props.history.push("/edit/"+this.props.match.params.id);
+    localStorage.setItem("HasActiveItem", '' );
     //some logic
 }
 
@@ -66,14 +67,16 @@ class ActiveList extends Component {
                 {this.state.QUEUE_HDR.map(board =>
                   <tr>
                     <td>{board.QUEUE_NO}</td>
-                    <td>{board.BRANCH_CODE}</td>
-                    <td>{board.STATUS}</td>
+                    <td className="hidden">{board.BRANCH_CODE}</td>
+                    <td className="hidden">{board.STATUS}</td>
                     <td>
-                        <Link to={`/edit/${board.key}?stat=DONE`} className="btn btn-success">Done</Link>
-                        <Link to={`/edit/${board.key}?stat=PENDING`} className="btn btn-success" >Return</Link>
-                        <Link to={`/edit/${board.key}?stat=HOLD`} className="btn btn-success" >Hold</Link>
-                        <Link to={`/edit/${board.key}?stat=NOSHOW`} className="btn btn-success" >No Show</Link>
-                      
+                    <div class="btn-group" role="group" >
+  
+                        <Link to={`/edit/${board.key}?stat=DONE`} type="button" className="btn btn-success btn btn-secondary">Done</Link>
+                        <Link to={`/edit/${board.key}?stat=PENDING`} type="button" className="btn btn-success btn btn-secondary">Return</Link>
+                        <Link to={`/edit/${board.key}?stat=HOLD`} type="button" className="btn btn-success btn btn-secondary" >Hold</Link>
+                        <Link to={`/edit/${board.key}?stat=NOSHOW`} type="button" className="btn btn-success btn btn-secondary" >No Show</Link>
+                        </div>
                     </td>
                   </tr>
                 )}

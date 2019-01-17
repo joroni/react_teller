@@ -25,16 +25,18 @@ class PendingList extends Component {
 
 
   checkActive(){
-    let ActiveItem = document.querySelector("#ActiveItem tbody tr");
-  if(ActiveItem.rows.length !== 0){
+    let hasActiveItem =localStorage.getItem("hasActive");
+  if(hasActiveItem === ""){
     alert('Multiple items is not allowed at same time')
-    false();
+    return false;
+    } else{
+     return true;
     }
   }
 
   
   componentDidUpdate() {
-  this.checkActive();
+  //this.checkActive();
   }
   
 
@@ -70,8 +72,12 @@ class PendingList extends Component {
     const buttonValue = e.target.value;
     console.log(buttonValue);
     localStorage.setItem("setAs",buttonValue );
+    localStorage.setItem("hasActive", 'YES' );
     this.props.history.push("/edit/"+this.props.match.params.id);
     //some logic
+
+
+   // this.getUrlParam();
 }
   
 
@@ -97,7 +103,7 @@ class PendingList extends Component {
               <tbody>
                 {this.state.QUEUE_HDR.map(board =>
                   <tr className={board.QUEUE_NO}>
-                    <td className="QueueNo"><Link className="serveBtn" to={`/edit/${board.key}`}>{board.QUEUE_NO}</Link></td>
+                    <td className="QueueNo"><Link className="serveBtn" to={`/edit/${board.key}/?stat=ACTIVE`}>{board.QUEUE_NO}</Link></td>
                     <td className="hidden">{board.BRANCH_CODE}</td>
                     <td className="hidden">{board.STATUS}</td>
                     <td><Link to={`/edit/${board.key}/?stat=ACTIVE`} className="serveBtn btn btn-success" style={{ display: 'none' }}>Serve</Link></td>

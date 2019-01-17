@@ -75,20 +75,24 @@ class App extends Component {
 
     return (
       <div class="container">
-        <button onClick={this.handleClick} value="ACTIVE" className="btn btn-primary">Serve</button>
-        <button onClick={this.handleClick} value="HOLD" className="btn btn-primary">Hold</button>
-        <button onClick={this.handleClick} value="NOSHOW" className="btn btn-primary">No Show</button>
-        <button onClick={this.handleClick} value="RETURN" className="btn btn-primary">Return</button>
-        <button onClick={this.handleClick} value="DONE" className="btn btn-primary">Done</button>
-
-        <div>
-          <div><PendingList/></div>
-          <div>
-            <div><ActiveList/></div>
-            <div><HoldList/></div>
+        <div className="row">
+          <div className="col-4"><PendingList /></div>
+          <div className="col-8"> <div>
+            <div><ActiveList /></div>
+            <div><HoldList /></div>
+          </div>
           </div>
 
+          <button onClick={this.handleClick} value="ACTIVE" className="btn btn-primary">Serve</button>
+          <button onClick={this.handleClick} value="HOLD" className="btn btn-primary">Hold</button>
+          <button onClick={this.handleClick} value="NOSHOW" className="btn btn-primary">No Show</button>
+          <button onClick={this.handleClick} value="RETURN" className="btn btn-primary">Return</button>
+          <button onClick={this.handleClick} value="DONE" className="btn btn-primary">Done</button>
+
         </div>
+
+
+
       </div>
     );
   }
