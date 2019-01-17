@@ -53,24 +53,24 @@ class ActiveList extends Component {
 
   render() {
     return (
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">
               SERVING
             </h3>
           </div>
-          <div class="panel-body">
-            <h4 className="hidden"><Link to="/create" class="btn btn-primary">Add</Link></h4>
-            <Table id="ActiveItem" class="table table-stripe">
+          <div className="panel-body">
+            <h4 className="hidden"><Link to="/create" className="btn btn-primary">Add</Link></h4>
+            <Table id="ActiveItem" className="table table-stripe">
               <tbody>
                 {this.state.QUEUE_HDR.map(board =>
-                  <tr>
+                  <tr key={board.QUEUE_NO} >
                     <td>{board.QUEUE_NO}</td>
                     <td className="hidden">{board.BRANCH_CODE}</td>
                     <td className="hidden">{board.STATUS}</td>
                     <td>
-                    <div class="btn-group" role="group" >
+                    <div className="btn-group" role="group" >
   
                         <Link to={`/edit/${board.key}?stat=DONE`} type="button" className="btn btn-success btn btn-secondary">Done</Link>
                         <Link to={`/edit/${board.key}?stat=PENDING`} type="button" className="btn btn-success btn btn-secondary">Return</Link>

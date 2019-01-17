@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom';
 import './App.css';
 import firebase from './Firebase';
 import HoldList from './components/HoldList';
-import ActiveList from './components/ActiveList';
-import FormDialog from './components/FormDialog';
+import ActiveJoined from './components/ActiveJoined';
+//import FormDialog from './components/FormDialog';
 //import Button from '@material-ui/core/Button';
-import CustomizedTable from './components/CustomizedTable';
-import Paper from './components/Paper';
-import FullWidthGrid from './components/FullWidthGrid';
+//import CustomizedTable from './components/CustomizedTable';
+//import Paper from './components/Paper';
+//import FullWidthGrid from './components/FullWidthGrid';
 import PendingList from './components/PendingList';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+   // this.handleClick = this.handleClick.bind(this);
     this.ref = firebase.firestore().collection('QUEUE_HDR').where("STATUS", "==", "PENDING");
     this.unsubscribe = null;
     this.state = {
@@ -23,7 +23,7 @@ class App extends Component {
     };
   }
 
-
+/*
   handleClick = e => {
     const buttonValue = e.target.value;
     console.log(buttonValue);
@@ -37,7 +37,7 @@ class App extends Component {
     console.log('Click happened', this.id);
 
   }
-
+*/
   onCollectionUpdate = (querySnapshot) => {
     const QUEUE_HDR = [];
     querySnapshot.forEach((doc) => {
@@ -74,21 +74,22 @@ class App extends Component {
   render() {
 
     return (
-      <div class="container">
+      <div className="container">
         <div className="row">
-          <div className="col-4"><PendingList /></div>
-          <div className="col-8"> <div>
-            <div><ActiveList /></div>
+          <div className="col-4 sidenav"><PendingList /></div>
+          <div className="col-8 min-content"> 
+            <div><ActiveJoined /></div>
             <div><HoldList /></div>
           </div>
-          </div>
+        </div>
 
-          <button onClick={this.handleClick} value="ACTIVE" className="btn btn-primary">Serve</button>
+        <div className="hidden"> 
+         <button onClick={this.handleClick} value="ACTIVE" className="btn btn-primary">Serve</button>
           <button onClick={this.handleClick} value="HOLD" className="btn btn-primary">Hold</button>
           <button onClick={this.handleClick} value="NOSHOW" className="btn btn-primary">No Show</button>
           <button onClick={this.handleClick} value="RETURN" className="btn btn-primary">Return</button>
           <button onClick={this.handleClick} value="DONE" className="btn btn-primary">Done</button>
-
+         
         </div>
 
 

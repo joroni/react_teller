@@ -45,30 +45,30 @@ class Create extends Component {
   render() {
     const { QUEUE_NO, BRANCH_CODE, STATUS } = this.state;
     return (
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">
               ADD BOARD
             </h3>
           </div>
-          <div class="panel-body">
-            <h4><Link to="/" class="btn btn-primary">Book List</Link></h4>
+          <div className="panel-body">
+            <h4><Link to="/" className="btn btn-primary">Book List</Link></h4>
             <form onSubmit={this.onSubmit}>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="QUEUE_NO">QUEUE_NO:</label>
-                <input type="text" class="form-control" name="QUEUE_NO" value={QUEUE_NO} onChange={this.onChange} placeholder="QUEUE_NO" />
+                <input type="text" className="form-control" name="QUEUE_NO" value={QUEUE_NO} onChange={this.onChange} placeholder="QUEUE_NO" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="BRANCH_CODE">BRANCH_CODE:</label>
-                <input class="form-control" name="BRANCH_CODE" onChange={this.onChange} placeholder="BRANCH_CODE" cols="80" value={BRANCH_CODE} />
+                <input className="form-control" name="BRANCH_CODE" onChange={this.onChange} placeholder="BRANCH_CODE" cols="80" value={BRANCH_CODE} />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="STATUS">STATUS:</label>
-                <input type="text" class="form-control" name="STATUS" value={STATUS} onChange={this.onChange} placeholder="STATUS" />
+                <input type="text" className="form-control" name="STATUS" value={STATUS} onChange={this.onChange} placeholder="STATUS" />
               </div>
-              <Link to="/" class="btn btn-primary">Cancel</Link>
-              <button type="submit" class="btn btn-success">Submit</button>
+              <Link to="/" className="btn btn-primary">Cancel</Link>
+              <button type="submit" className="btn btn-success">Submit</button>
             </form>
           </div>
         </div>

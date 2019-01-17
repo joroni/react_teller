@@ -78,7 +78,7 @@ class App extends Component {
   render() {
   
     return (
-      <div class="container">
+      <div className="container">
        
         <button onClick={this.handleClick}  value="ACTIVE" className="btn btn-primary">Serve</button> 
         <button onClick={this.handleClick}  value="HOLD" className="btn btn-primary">Hold</button> 
@@ -86,15 +86,15 @@ class App extends Component {
        <button onClick={this.handleClick}  value="RETURN" className="btn btn-primary">Return</button>
        <button onClick={this.handleClick}  value="DONE" className="btn btn-primary">Done</button>
 
-        <div class="panel panel-default">
-          <div class="panel-heading hidden">
-            <h3 class="panel-title">
+        <div className="panel panel-default">
+          <div className="panel-heading hidden">
+            <h3 className="panel-title">
               BOARD LIST
             </h3>
           </div>
-          <div class="panel-body">
-            <h4 className="hidden"><Link to="/create" class="btn btn-primary">Add</Link></h4>
-            <table class="table table-stripe">
+          <div className="panel-body">
+            <h4 className="hidden"><Link to="/create" className="btn btn-primary">Add</Link></h4>
+            <table className="table table-stripe">
               
              
               <tbody>

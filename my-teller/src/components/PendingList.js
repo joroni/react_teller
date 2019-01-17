@@ -86,23 +86,23 @@ class PendingList extends Component {
   // Table data sorting ends....
   render() {
     return (
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">
               PENDING
             </h3>
           </div>
-          <div class="panel-body">
+          <div className="panel-body">
            <Link to="/create" className="btn btn-primary hidden">Add</Link>
             <button className="btn btn-primary hidden">
         SERVE
       </button>
-            <Table id="PendingList" class="table table-stripe">
+            <Table id="PendingList" className="table table-stripe">
              
               <tbody>
                 {this.state.QUEUE_HDR.map(board =>
-                  <tr className={board.QUEUE_NO}>
+                  <tr key={board.QUEUE_NO} className={board.QUEUE_NO}>
                     <td className="QueueNo"><Link className="serveBtn" to={`/edit/${board.key}/?stat=ACTIVE`}>{board.QUEUE_NO}</Link></td>
                     <td className="hidden">{board.BRANCH_CODE}</td>
                     <td className="hidden">{board.STATUS}</td>

@@ -24,19 +24,20 @@ class Edit extends Component {
   }
   componentDidMount() {
   
-    getUrlParam();
-    function getUrlParam(parameter, defaultvalue){
-      var urlparameter = defaultvalue;
-      if(window.location.href.indexOf(parameter) > -1){
-          urlparameter = this.getUrlVars()[parameter];
-          }
-          console.log(urlparameter);
-      return urlparameter;
+    
      
+    this.getUrlParam();
   }
     
  
- 
+  getUrlParam(parameter, defaultvalue){
+    var urlparameter = defaultvalue;
+    if(window.location.href.indexOf(parameter) > -1){
+        urlparameter = this.getUrlVars()[parameter];
+        
+        console.log(urlparameter);
+    return urlparameter;
+  }
  
   function getAllUrlParams(url) {
     
@@ -64,8 +65,8 @@ class Edit extends Component {
           var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
     
           // (optional) keep case consistent
-          paramName = paramName.toLowerCase();
-          if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
+          paramName = paramName.toUpperCase();
+          if (typeof paramValue === 'string') paramValue = paramValue.toUpperCase();
     
           // if the paramName ends with square brackets, e.g. colors[] or colors[2]
           if (paramName.match(/\[(\d+)?\]$/)) {
@@ -121,7 +122,7 @@ class Edit extends Component {
           STATUS: board.STATUS
         });
        // alert(this.state.STATUS);
-       let watstatus = getAllUrlParams().stat.toUpperCase();
+       let watstatus = getAllUrlParams().stat;
        //alert(watstatus);
       // this.setState({STATUS:watstatus.toUpperCase()});
       this.setState({STATUS:watstatus});
@@ -206,11 +207,11 @@ class Edit extends Component {
             <form onSubmit={this.onSubmit}>
               <div class="form-group">
                 <label for="title">QUEUE_NO:</label>
-                <input type="text" readOnlys class="form-control" name="QUEUE_NO" value={this.state.QUEUE_NO} onChange={this.onChange} placeholder="QUEUE_NO" />
+                <input type="text" readOnly class="form-control" name="QUEUE_NO" value={this.state.QUEUE_NO} onChange={this.onChange} placeholder="QUEUE_NO" />
               </div>
               <div class="form-group hidden">
                 <label for="BRANCH_CODE">BRANCH_CODE:</label>
-                <input type="text" readOnlys class="form-control" name="BRANCH_CODE" value={this.state.BRANCH_CODE} onChange={this.onChange} placeholder="BRANCH_CODE" />
+                <input type="text" readOnly class="form-control" name="BRANCH_CODE" value={this.state.BRANCH_CODE} onChange={this.onChange} placeholder="BRANCH_CODE" />
               </div>
               <div class="form-group hiddens">
                 <label for="STATUS">STATUS:</label>

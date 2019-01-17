@@ -46,19 +46,19 @@ class HoldList extends Component {
   // Table data sorting ends....
   render() {
     return (
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">
              ON HOLD
             </h3>
           </div>
-          <div class="panel-body">
-            <h4 className="hidden"><Link to="/create" class="btn btn-primary">Add</Link></h4>
-            <Table id="PendingList" class="table table-stripe">
+          <div className="panel-body">
+            <h4 className="hidden"><Link to="/create" className="btn btn-primary">Add</Link></h4>
+            <Table id="PendingList" className="table table-stripe">
               <tbody>
                 {this.state.QUEUE_HDR.map(board =>
-                  <tr className={board.QUEUE_NO}>
+                  <tr  key={board.QUEUE_NO}  className={board.QUEUE_NO}>
                     <td><Link to={`/edit/${board.key}`}>{board.QUEUE_NO}</Link></td>
                     <td>{board.BRANCH_CODE}</td>
                     <td>{board.STATUS} </td>
