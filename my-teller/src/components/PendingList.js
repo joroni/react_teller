@@ -18,7 +18,8 @@ class PendingList extends Component {
     this.state = {
       QUEUE_HDR: [],
       isActive: true,
-      id:''
+      id:'',
+   isEnable: false
     };
    
   }
@@ -65,6 +66,13 @@ class PendingList extends Component {
 
   componentDidMount() {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);   
+    if (localStorage.getItem('countItem') !== 0){
+       // alert("it has");
+      document.getElementsByClassName("serveBtn").display="none";
+     
+    }else{
+      alert("Nothing")
+    }
   }
 
 
@@ -103,10 +111,12 @@ class PendingList extends Component {
               <tbody>
                 {this.state.QUEUE_HDR.map(board =>
                   <tr className={board.QUEUE_NO}>
-                    <td className="QueueNo"><Link className="serveBtn" to={`/edit/${board.key}/?stat=ACTIVE`}>{board.QUEUE_NO}</Link></td>
+                    <td className="QueueNo"><Link className="serveBtn" to={`/edit/${board.key}/?stat=ACTIVE&queue=${board.QUEUE_NO}`}>{board.QUEUE_NO}</Link></td>
                     <td className="hidden">{board.BRANCH_CODE}</td>
                     <td className="hidden">{board.STATUS}</td>
-                    <td><Link to={`/edit/${board.key}/?stat=ACTIVE`} className="serveBtn btn btn-success" style={{ display: 'none' }}>Serve</Link></td>
+
+                
+                    <td><Link disabled = {this.state.isEnable} to={`/edit/${board.key}/?stat=ACTIVE&queue=${board.QUEUE_NO}`} className="serveBtn btn btn-success" style={{ display: 'none' }}>Serve</Link></td>
                   </tr>
                 )}
               </tbody>

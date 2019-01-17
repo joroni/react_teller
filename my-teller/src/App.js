@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './App.css';
 import firebase from './Firebase';
 import HoldList from './components/HoldList';
+import ActiveJoined from './components/ActiveJoined';
 import ActiveList from './components/ActiveList';
 import FormDialog from './components/FormDialog';
 //import Button from '@material-ui/core/Button';
@@ -78,7 +79,8 @@ class App extends Component {
         <div className="row">
           <div className="col-4"><PendingList /></div>
           <div className="col-8"> <div>
-            <div><ActiveList /></div>
+            <div><ActiveJoined/></div>
+            
             <div><HoldList /></div>
           </div>
           </div>

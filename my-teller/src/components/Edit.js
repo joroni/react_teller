@@ -122,9 +122,12 @@ class Edit extends Component {
         });
        // alert(this.state.STATUS);
        let watstatus = getAllUrlParams().stat.toUpperCase();
+       let watqueue = getAllUrlParams().queue.toUpperCase();
+       localStorage.setItem('ThisQueuNo', watqueue)
        //alert(watstatus);
       // this.setState({STATUS:watstatus.toUpperCase()});
-      this.setState({STATUS:watstatus});
+      this.setState({STATUS:watstatus,
+                   QUEUE_NO:watqueue});
        /*   let toBeSetAs = localStorage.getItem("setAs");
       
      //if(this.state.STATUS === 'PENDING'){
@@ -206,7 +209,7 @@ class Edit extends Component {
             <form onSubmit={this.onSubmit}>
               <div class="form-group">
                 <label for="title">QUEUE_NO:</label>
-                <input type="text" readOnlys class="form-control" name="QUEUE_NO" value={this.state.QUEUE_NO} onChange={this.onChange} placeholder="QUEUE_NO" />
+                <input type="text" readOnlys class="form-control" name="QUEUE_NO" value={this.watqueue} onChange={this.onChange} placeholder="QUEUE_NO" />
               </div>
               <div class="form-group hidden">
                 <label for="BRANCH_CODE">BRANCH_CODE:</label>

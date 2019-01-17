@@ -76,7 +76,7 @@ body, html {
 
 
 #PendingList tbody tr:first-child > td:last-child > a.btn, #ActiveItem tbody tr:first-child > td:last-child > a.btn{
-  display:block !important;
+  display:block;
 }
 
 
