@@ -9,9 +9,9 @@ class Create extends Component {
     super();
     this.ref = firebase.firestore().collection('boards');
     this.state = {
-      title: '',
-      description: '',
-      author: ''
+      QUEUE_NO: '',
+      BRANCH_CODE: '',
+      STATUS: ''
     };
   }
   onChange = (e) => {
@@ -23,17 +23,17 @@ class Create extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { title, description, author } = this.state;
+    const { QUEUE_NO, BRANCH_CODE, STATUS } = this.state;
 
     this.ref.add({
-      title,
-      description,
-      author
+      QUEUE_NO,
+      BRANCH_CODE,
+      STATUS
     }).then((docRef) => {
       this.setState({
-        title: '',
-        description: '',
-        author: ''
+        QUEUE_NO: '',
+        BRANCH_CODE: '',
+        STATUS: ''
       });
       this.props.history.push("/")
     })
@@ -43,7 +43,7 @@ class Create extends Component {
   }
 
   render() {
-    const { title, description, author } = this.state;
+    const { QUEUE_NO, BRANCH_CODE, STATUS } = this.state;
     return (
       <div class="container">
         <div class="panel panel-default">
@@ -56,16 +56,16 @@ class Create extends Component {
             <h4><Link to="/" class="btn btn-primary">Book List</Link></h4>
             <form onSubmit={this.onSubmit}>
               <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" class="form-control" name="title" value={title} onChange={this.onChange} placeholder="Title" />
+                <label for="QUEUE_NO">QUEUE_NO:</label>
+                <input type="text" class="form-control" name="QUEUE_NO" value={QUEUE_NO} onChange={this.onChange} placeholder="QUEUE_NO" />
               </div>
               <div class="form-group">
-                <label for="description">Description:</label>
-                <textArea class="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{description}</textArea>
+                <label for="BRANCH_CODE">BRANCH_CODE:</label>
+                <textArea class="form-control" name="BRANCH_CODE" onChange={this.onChange} placeholder="BRANCH_CODE" cols="80" rows="3">{BRANCH_CODE}</textArea>
               </div>
               <div class="form-group">
-                <label for="author">Author:</label>
-                <input type="text" class="form-control" name="author" value={author} onChange={this.onChange} placeholder="Author" />
+                <label for="STATUS">STATUS:</label>
+                <input type="text" class="form-control" name="STATUS" value={STATUS} onChange={this.onChange} placeholder="STATUS" />
               </div>
               <button type="submit" class="btn btn-success">Submit</button>
             </form>
