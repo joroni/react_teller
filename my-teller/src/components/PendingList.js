@@ -11,7 +11,6 @@ import Table from '@material-ui/core/Table';
 class PendingList extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
    // this.handleClick = this.handleClick.bind(this);
     this.ref = firebase.firestore().collection('QUEUE_HDR').where("STATUS", "==", "PENDING").where("BRANCH_CODE", "==", "PBCOM001");
     this.unsubscribe = null;
@@ -23,6 +22,12 @@ class PendingList extends Component {
    
   }
 
+
+  getClass(){
+    var a = document.querySelector('#PendingList > tbody > tr')[0].className;
+    var x = document.getElementsByTagName("tr")[0].className;
+    localStorage.setItem("setAs", x)
+  }
 
   checkActive(){
     let hasActiveItem =localStorage.getItem("hasActive");
@@ -40,7 +45,7 @@ class PendingList extends Component {
   }
   
 
-  handleClick() {
+  handleClicks() {
     this.setState(state => ({
         isActiveOn: !state.isActiveOn
     }));
@@ -71,13 +76,8 @@ class PendingList extends Component {
   handleClick = e => {
     const buttonValue = e.target.value;
     console.log(buttonValue);
-    localStorage.setItem("setAs",buttonValue );
+    localStorage.setItem("setAs","ACTIVE" );
     localStorage.setItem("hasActive", 'YES' );
-    this.props.history.push("/edit/"+this.props.match.params.id);
-    //some logic
-
-
-   // this.getUrlParam();
 }
   
 
@@ -102,11 +102,11 @@ class PendingList extends Component {
              
               <tbody>
                 {this.state.QUEUE_HDR.map(board =>
-                  <tr key={board.QUEUE_NO} className={board.QUEUE_NO}>
-                    <td className="QueueNo"><Link className="serveBtn" to={`/edit/${board.key}/?stat=ACTIVE`}>{board.QUEUE_NO}</Link></td>
+                  <tr key={board.QUEUE_NO} className="ACTIVE">
+                    <td className="QueueNo"><Link className="serveBtn" to={`/edit/${board.key}`}>{board.QUEUE_NO}</Link></td>
                     <td className="hidden">{board.BRANCH_CODE}</td>
                     <td className="hidden">{board.STATUS}</td>
-                    <td><Link to={`/edit/${board.key}/?stat=ACTIVE`} className="serveBtn btn btn-success" style={{ display: 'none' }}>Serve</Link></td>
+                    <td><Link onClick={this.handleClick} value="ACTIVE" to={`/edit/${board.key}`} className="btn btn-success" style={{ display: 'none' }}>Serve</Link></td>
                   </tr>
                 )}
               </tbody>

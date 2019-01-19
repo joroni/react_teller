@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './App.css';
 import firebase from './Firebase';
 import HoldList from './components/HoldList';
-import ActiveJoined from './components/ActiveJoined';
+import ActiveList from './components/ActiveList';
 //import FormDialog from './components/FormDialog';
 //import Button from '@material-ui/core/Button';
 //import CustomizedTable from './components/CustomizedTable';
@@ -72,13 +72,12 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <div className="container">
         <div className="row">
           <div className="col-4 sidenav"><PendingList /></div>
           <div className="col-8 min-content"> 
-            <div><ActiveJoined /></div>
+            <div><ActiveList /></div>
             <div><HoldList /></div>
           </div>
         </div>

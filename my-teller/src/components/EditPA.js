@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../Firebase';
 import { Link } from 'react-router-dom';
 
-class Edit extends Component {
+class EditPA extends Component {
 
   constructor(props) {
     super(props);
@@ -150,4 +150,4 @@ class Edit extends Component {
   }
 }
 
-export default Edit;
+export default EditPA;

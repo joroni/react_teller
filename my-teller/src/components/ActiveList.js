@@ -10,7 +10,10 @@ import Table from '@material-ui/core/Table';
 class ActiveList extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.returnClick = this.returnClick.bind(this);
+    this.holdClick = this.holdClick.bind(this);
+    this.doneClick = this.doneClick.bind(this);
+    this.noshowClick = this.noshowClick.bind(this);
     this.ref = firebase.firestore().collection('QUEUE_HDR').where("STATUS", "==", "ACTIVE");
     this.unsubscribe = null;
     this.state = {
@@ -19,15 +22,34 @@ class ActiveList extends Component {
   }
 
 
-  handleClick = e => {
+  returnClick = e => {
     const buttonValue = e.target.value;
     console.log(buttonValue);
-    localStorage.setItem("setAs",buttonValue );
-    this.props.history.push("/edit/"+this.props.match.params.id);
-    localStorage.setItem("HasActiveItem", '' );
-    //some logic
-}
+    localStorage.setItem("setAs","PENDING" );
+    localStorage.setItem("hasActive", 'NO' );
+  }
+  
+  doneClick = e => {
+    const buttonValue = e.target.value;
+    console.log(buttonValue);
+    localStorage.setItem("setAs","DONE" );
+    localStorage.setItem("hasActive", 'NO' );
+  }
 
+  holdClick = e => {
+    const buttonValue = e.target.value;
+    console.log(buttonValue);
+    localStorage.setItem("setAs","HOLD" );
+    localStorage.setItem("hasActive", 'NO' );
+  }
+
+  noshowClick = e => {
+    const buttonValue = e.target.value;
+    console.log(buttonValue);
+    localStorage.setItem("setAs","NOSHOW" );
+    localStorage.setItem("hasActive", 'NO' );
+  }
+  
   onCollectionUpdate = (querySnapshot) => {
     const QUEUE_HDR = [];
     querySnapshot.forEach((doc) => {
@@ -72,10 +94,10 @@ class ActiveList extends Component {
                     <td>
                     <div className="btn-group" role="group" >
   
-                        <Link to={`/edit/${board.key}?stat=DONE`} type="button" className="btn btn-success btn btn-secondary">Done</Link>
-                        <Link to={`/edit/${board.key}?stat=PENDING`} type="button" className="btn btn-success btn btn-secondary">Return</Link>
-                        <Link to={`/edit/${board.key}?stat=HOLD`} type="button" className="btn btn-success btn btn-secondary" >Hold</Link>
-                        <Link to={`/edit/${board.key}?stat=NOSHOW`} type="button" className="btn btn-success btn btn-secondary" >No Show</Link>
+                        <Link to={`/edit/${board.key}`} type="button" onClick={this.doneClick} value="DONE" className="btn btn-success btn btn-secondary">Done</Link>
+                        <Link to={`/edit/${board.key}`} type="button" onClick={this.returnClick} value="PENDING" className="btn btn-success btn btn-secondary">Return</Link>
+                        <Link to={`/edit/${board.key}`} type="button" onClick={this.holdClick} value="HOLD" className="btn btn-success btn btn-secondary" >Hold</Link>
+                        <Link to={`/edit/${board.key}`} type="button" onClick={this.noshowClick} value="NOSHOW" className="btn btn-success btn btn-secondary" >No Show</Link>
                         </div>
                     </td>
                   </tr>
