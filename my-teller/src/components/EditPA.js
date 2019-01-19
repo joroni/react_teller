@@ -17,15 +17,6 @@ class EditPA extends Component {
     
   }
 
-  limitActiveToOne() {
-    const Active = document.getElementById('ActiveItem');
-    const ActiveItem = Active.document.getElementsByTagName('tr');
-    if (ActiveItem.firstChild.length === 1) {
-      document.getElementsByClassName('serveBtn').prop("disabled", true);
-    } else {
-      document.getElementsByClassName('serveBtn').prop("disabled", false);
-    }
-  }
   
   handleClick() {
     this.setState(state => ({

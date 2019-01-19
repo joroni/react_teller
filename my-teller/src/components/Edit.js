@@ -13,18 +13,24 @@ class Edit extends Component {
       STATUS:'',
     };
     this.handleClick = this.handleClick.bind(this);
+    this.disabled = false
     //const statIs = localStorage.getItem("setAs");
     
   }
 
   limitActiveToOne() {
-    const Active = document.getElementById('ActiveItem');
-    const ActiveItem = Active.document.getElementsByTagName('tr');
-    if (ActiveItem.firstChild.length === 1) {
-      document.getElementsByClassName('serveBtn').prop("disabled", true);
-    } else {
-      document.getElementsByClassName('serveBtn').prop("disabled", false);
-    }
+    const activeOne = localStorage.getItem("hasActive");
+   // alert(activeOne);
+    if (activeOne === 'YES') {
+        alert('Empty your Active item first');
+        this.disabled = true
+        return false;
+       // document.querySelector('.serveBtn').prop("disabled", true);
+      } else {
+        this.disabled = false
+       // this.prop("disabled", false);
+      return false;
+      } 
   }
   
   handleClick() {
@@ -35,6 +41,7 @@ class Edit extends Component {
 
   componentDidMount(){
    this.getAllURLParams();
+   this.limitActiveToOne();
   }
   
  getAllURLParams() {
@@ -136,7 +143,7 @@ class Edit extends Component {
                 <input type="text" class="form-control" name="STATUS" value={this.state.STATUS} onChange={this.onChange} placeholder="STATUS" />
               </div>
               <Link to="/" class="btn btn-primary">Cancel</Link>
-              &nbsp; <button type="submit" class="btn btn-success">OK</button>
+              &nbsp; <button type="submit" disabled={this.disabled} class="btn btn-success">OK</button>
             </form>
           </div>
         </div>

@@ -18,7 +18,9 @@ class PendingList extends Component {
       QUEUE_HDR: [],
       isActive: true,
       id:''
+
     };
+    this.handleCheck ='none'
    
   }
 
@@ -39,9 +41,24 @@ class PendingList extends Component {
     }
   }
 
+  limitActiveToOne() {
+    const activeOne = localStorage.getItem("hasActive");
+   // alert(activeOne);
+    if (activeOne === 'YES') {
+       alert('Empty your Active item first');
+       this.handleCheck ='none'
+       // return false;
+      // document.querySelector('.serveBtn').prop("disabled", true);
+      } else {
+       // this.prop("disabled", false);
+       this.handleCheck ='block'
+      return true;
+      } 
+  }
   
   componentDidUpdate() {
   //this.checkActive();
+  this.limitActiveToOne();
   }
   
 
@@ -69,6 +86,7 @@ class PendingList extends Component {
   }
 
   componentDidMount() {
+    this.limitActiveToOne();
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);   
   }
 
@@ -106,7 +124,7 @@ class PendingList extends Component {
                     <td className="QueueNo"><Link className="serveBtn" to={`/edit/${board.key}`}>{board.QUEUE_NO}</Link></td>
                     <td className="hidden">{board.BRANCH_CODE}</td>
                     <td className="hidden">{board.STATUS}</td>
-                    <td><Link onClick={this.handleClick} value="ACTIVE" to={`/edit/${board.key}`} className="btn btn-success" style={{ display: 'none' }}>Serve</Link></td>
+                    <td><Link onClick={this.handleClick}  value="ACTIVE" to={`/edit/${board.key}`} className="btn btn-success" style={{ display: this.handleCheck }}>Serve</Link></td>
                   </tr>
                 )}
               </tbody>
