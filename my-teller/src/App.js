@@ -82,7 +82,6 @@ class App extends Component {
       <div className="container">
        <header>
 <h2 className="branding"><img src="./logo.png" /></h2>
-
         </header>
         <div className="contents">
         <div className="row">
