@@ -4,6 +4,7 @@ import './App.css';
 import firebase from './Firebase';
 import HoldList from './components/HoldList';
 import ActiveList from './components/ActiveList';
+//import ActiveJoined from './components/ActiveJoined';
 //import FormDialog from './components/FormDialog';
 //import Button from '@material-ui/core/Button';
 //import CustomizedTable from './components/CustomizedTable';
@@ -73,10 +74,17 @@ class App extends Component {
 
   render() {
     return (
+      
       <div className="container">
+       <header>
+<h2>Teller</h2>
+
+        </header>
+        <div className="contents">
         <div className="row">
-          <div className="col-4 sidenav"><PendingList /></div>
-          <div className="col-8 min-content"> 
+       
+          <div className="col-4x sidenav"><PendingList /></div>
+          <div className="col-8x min-content"> 
             <div><ActiveList /></div>
             <div><HoldList /></div>
           </div>
@@ -90,7 +98,7 @@ class App extends Component {
           <button onClick={this.handleClick} value="DONE" className="btn btn-primary">Done</button>
          
         </div>
-
+        </div>
 
 
       </div>

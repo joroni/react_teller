@@ -94,7 +94,7 @@ class HoldList extends Component {
           </div>
           <div className="panel-body">
             <h4 className="hidden"><Link to="/create" className="btn btn-primary">Add</Link></h4>
-            <Table id="HoldingList" className="table table-stripe">
+            <Table id="HoldingList" className="table">
               <tbody>
                 {this.state.QUEUE_HDR.map(board =>
                   <tr  key={board.QUEUE_NO}  className={board.QUEUE_NO}>

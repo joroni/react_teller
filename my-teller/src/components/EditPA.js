@@ -101,33 +101,33 @@ class EditPA extends Component {
 
   render() {
     return (
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-title text-centered">
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <div className="panel-title text-centered">
              <p>This will set</p>
                   <h2>          {this.state.QUEUE_NO}</h2>
              <p> to</p>
               <h2>{this.state.STATUS}</h2>
             </div>
           </div>
-          <div class="panel-body">
-            <h4 className="hidden"><Link to="/" class="btn btn-primary">Board List</Link></h4>
+          <div className="panel-body">
+            <h4 className="hidden"><Link to="/" className="btn btn-primary">Board List</Link></h4>
             <form onSubmit={this.onSubmit} className="text-centered"> 
-              <div class="form-group hidden">
+              <div className="form-group hidden">
                 <label for="title">QUEUE_NO:</label>
-                <input type="text" readOnly class="form-control" name="QUEUE_NO" value={this.state.QUEUE_NO} onChange={this.onChange} placeholder="QUEUE_NO" />
+                <input type="text" readOnly className="form-control" name="QUEUE_NO" value={this.state.QUEUE_NO} onChange={this.onChange} placeholder="QUEUE_NO" />
               </div>
-              <div class="form-group hidden">
+              <div className="form-group hidden">
                 <label for="BRANCH_CODE">BRANCH_CODE:</label>
-                <input type="text" readOnly class="form-control" name="BRANCH_CODE" value={this.state.BRANCH_CODE} onChange={this.onChange} placeholder="BRANCH_CODE" />
+                <input type="text" readOnly className="form-control" name="BRANCH_CODE" value={this.state.BRANCH_CODE} onChange={this.onChange} placeholder="BRANCH_CODE" />
               </div>
-              <div class="form-group hidden">
+              <div className="form-group hidden">
                 <label for="STATUS">STATUS:</label>
-                <input type="text" class="form-control" name="STATUS" value={this.state.STATUS} onChange={this.onChange} placeholder="STATUS" />
+                <input type="text" className="form-control" name="STATUS" value={this.state.STATUS} onChange={this.onChange} placeholder="STATUS" />
               </div>
-              <Link to="/" class="btn btn-primary">Cancel</Link>
-              &nbsp; <button type="submit" class="btn btn-success">OK</button>
+              <Link to="/" className="btn btn-primary">Cancel</Link>
+              &nbsp; <button type="submit" className="btn btn-success">OK</button>
             </form>
           </div>
         </div>

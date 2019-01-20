@@ -76,7 +76,7 @@ class ActiveList extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container ActiveContainer">
         <div className="panel panel-default">
           <div className="panel-heading">
             <h3 className="panel-title">
@@ -98,7 +98,6 @@ class ActiveList extends Component {
                         <Link to={`/edit/${board.key}`} type="button" onClick={this.doneClick} value="DONE" className="btn btn-success btn btn-secondary">Done</Link>
                         <Link to={`/edit/${board.key}`} type="button" onClick={this.returnClick} value="PENDING" className="btn btn-success btn btn-secondary">Return</Link>
                         <Link to={`/edit/${board.key}`} type="button" onClick={this.holdClick} value="HOLD" className="btn btn-success btn btn-secondary" >Hold</Link>
-                       
                         <Link to={`/edit/${board.key}`} type="button" onClick={this.noshowClick} value="NOSHOW" className="btn btn-success btn btn-secondary" >No Show</Link>
                         </div>
                     </td>

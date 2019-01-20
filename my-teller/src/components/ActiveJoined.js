@@ -7,72 +7,6 @@ import Icon from '@material-ui/core/Icon';
 import Table from '@material-ui/core/Table';
 
 
-function getAllUrlParams(url) {
-    
-    // get query string from url (optional) or window
-    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
-  console.log(queryString);
-    // we'll store the parameters here
-    var obj = {};
-  
-    // if query string exists
-    if (queryString) {
-  
-      // stuff after # is not part of query string, so get rid of it
-      queryString = queryString.split('#')[0];
-  
-      // split our query string into its component parts
-      var arr = queryString.split('&');
-  
-      for (var i = 0; i < arr.length; i++) {
-        // separate the keys and the values
-        var a = arr[i].split('=');
-  
-        // set parameter name and value (use 'true' if empty)
-        var paramName = a[0];
-        var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
-  
-        // (optional) keep case consistent
-        paramName = paramName.toLowerCase();
-        if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
-  
-        // if the paramName ends with square brackets, e.g. colors[] or colors[2]
-        if (paramName.match(/\[(\d+)?\]$/)) {
-  
-          // create key if it doesn't exist
-          var key = paramName.replace(/\[(\d+)?\]/, '');
-          if (!obj[key]) obj[key] = [];
-  
-          // if it's an indexed array e.g. colors[2]
-          if (paramName.match(/\[\d+\]$/)) {
-            // get the index value and add the entry at the appropriate position
-            var index = /\[(\d+)\]/.exec(paramName)[1];
-            obj[key][index] = paramValue;
-          } else {
-            // otherwise add the value to the end of the array
-            obj[key].push(paramValue);
-          }
-        } else {
-          // we're dealing with a string
-          if (!obj[paramName]) {
-            // if it doesn't exist, create property
-            obj[paramName] = paramValue;
-          } else if (obj[paramName] && typeof obj[paramName] === 'string'){
-            // if property does exist and it's a string, convert it to an array
-            obj[paramName] = [obj[paramName]];
-            obj[paramName].push(paramValue);
-          } else {
-            // otherwise add the property
-            obj[paramName].push(paramValue);
-          }
-        }
-      }
-    }
-  
-    return obj;
-
-    
-  }
 
 
   
@@ -80,18 +14,19 @@ class ActiveJoined extends Component {
 
     constructor(props) {
     super(props);
-    
+    let QUEUE_SELECTED = localStorage.getItem("queue_No");
     this.handleClick = this.handleClick.bind(this);
-    this.ref = firebase.firestore().collection('QUEUE_DTL').where("QUEUE_NO", "==", "W-1005");
+    this.ref = firebase.firestore().collection('QUEUE_DTL').where("QUEUE_NO", "==", QUEUE_SELECTED);
     this.unsubscribe = null;
-    
+   
 
     this.state = {
-        QUEUE_DTL: []
+        QUEUE_DTL: [],
+      //  QUEUE_SELECTED:''
       };
 
       
-      var countItem = firebase.firestore().collection('QUEUE_DTL').where("STATUS", "==", "ACTIVE")._query.filters[0];
+/* var countItem = firebase.firestore().collection('QUEUE_DTL').where("STATUS", "==", "ACTIVE")._query.filters[0];
       console.log(countItem);
       console.log('lkjhgf');
       if(countItem >= 1 ){
@@ -99,7 +34,7 @@ class ActiveJoined extends Component {
       }else{
         document.getElementsByClassName("serveBtn").display="none";
       }
-     
+     */
    
  
 
@@ -145,7 +80,7 @@ class ActiveJoined extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container ActiveContainer">
         <div className="panel panel-default">
           <div className="panel-heading">
             <h3 className="panel-title">
@@ -154,25 +89,31 @@ class ActiveJoined extends Component {
           </div>
           <div className="panel-body">
             <h4 className="hidden"><Link to="/create" className="btn btn-primary">Add</Link></h4>
-            <Table id="ActiveItem" className="table table-stripe">
-              <tbody>
-                {this.state.QUEUE_DTL.map(board =>
+            <Table id="ActiveItem1" className="table table-stripe">
+            {this.state.QUEUE_DTL.map(board =>
+              <tbody key={board.QUEUE_NO}>
+                
                   <tr>
                     <td>{board.QUEUE_NO}</td>
-                    <td className="hidden">{board.ACCOUNT}</td>
-                    <td className="hidden">{board.AMOUNT}</td>
-                    <td>
+                    <td>{board.ACCOUNT}</td>
+                    <td>{board.AMOUNT}</td>
+                  </tr>
+                  <tr>
+                    <td colSpan="3">
                     <div className="btn-group" role="group" >
   
-                        <Link to={`/edit/${board.key}?stat=DONE&queue=${board.QUEUE_NO}`} type="button" className="btn btn-success btn btn-secondary">Done</Link>
-                        <Link to={`/edit/${board.key}?stat=PENDING&queue=${board.QUEUE_NO}`} type="button" className="btn btn-success btn btn-secondary">Return</Link>
-                        <Link to={`/edit/${board.key}?stat=HOLD&queue=${board.QUEUE_NO}`} type="button" className="btn btn-success btn btn-secondary" >Hold</Link>
-                        <Link to={`/edit/${board.key}?stat=NOSHOW&queue=${board.QUEUE_NO}`} type="button" className="btn btn-success btn btn-secondary" >No Show</Link>
-                        </div>
+  <Link to={`/edit/${board.key}`} type="button" onClick={this.doneClick} value="DONE" className="btn btn-success btn btn-secondary">Done</Link>
+  <Link to={`/edit/${board.key}`} type="button" onClick={this.returnClick} value="PENDING" className="btn btn-success btn btn-secondary">Return</Link>
+  <Link to={`/edit/${board.key}`} type="button" onClick={this.holdClick} value="HOLD" className="btn btn-success btn btn-secondary" >Hold</Link>
+ 
+  <Link to={`/edit/${board.key}`} type="button" onClick={this.noshowClick} value="NOSHOW" className="btn btn-success btn btn-secondary" >No Show</Link>
+  </div>
+
                     </td>
                   </tr>
-                )}
+               
               </tbody>
+               )}
             </Table>
           </div>
         </div>
