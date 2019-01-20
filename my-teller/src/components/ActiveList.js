@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import firebase from '../Firebase';
 //import 'typeface-roboto';
-import Icon from '@material-ui/core/Icon';
+//import Icon from '@material-ui/core/Icon';
 import Table from '@material-ui/core/Table';
+import ActiveJoined from './ActiveJoined';
 
 
 class ActiveList extends Component {
   constructor(props) {
     super(props);
+    //this.activeQueue = this.activeQueue.bind(this);
     this.returnClick = this.returnClick.bind(this);
     this.holdClick = this.holdClick.bind(this);
     this.doneClick = this.doneClick.bind(this);
@@ -17,10 +19,16 @@ class ActiveList extends Component {
     this.ref = firebase.firestore().collection('QUEUE_HDR').where("STATUS", "==", "ACTIVE");
     this.unsubscribe = null;
     this.state = {
-      QUEUE_HDR: []
+      QUEUE_HDR: [],
+      activeQueue:''
     };
   }
 
+  onChange = (e) => {
+    const state = this.state
+    state[e.target.name] = e.target.value;
+    this.setState({activeQueue:state});
+  }
 
   returnClick = e => {
     const buttonValue = e.target.value;
@@ -54,9 +62,10 @@ class ActiveList extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const QUEUE_HDR = [];
     querySnapshot.forEach((doc) => {
-      const { QUEUE_NO, BRANCH_CODE, STATUS } = doc.data();
+      const { QUEUE_NO, BRANCH_CODE, STATUS,  activeQueue } = doc.data();
       QUEUE_HDR.push({
         key: doc.id,
+        activeQueue,
         doc, // DocumentSnapshot
         QUEUE_NO,
         BRANCH_CODE,
@@ -64,10 +73,14 @@ class ActiveList extends Component {
       });
     });
     this.setState({
-      QUEUE_HDR
+      QUEUE_HDR,
+      activeQueue:localStorage.getItem("queue_No")
    });
   }
 
+  componentWillUnmount(){
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+  }
  
 
   componentDidMount() {
@@ -76,20 +89,23 @@ class ActiveList extends Component {
 
   render() {
     return (
+    
       <div className="container ActiveContainer">
         <div className="panel panel-default">
-          <div className="panel-heading">
+          <div className="panel-heading hidden">
             <h3 className="panel-title">
               SERVING
             </h3>
           </div>
           <div className="panel-body">
             <h4 className="hidden"><Link to="/create" className="btn btn-primary">Add</Link></h4>
+            <div>  <ActiveJoined/></div>
+          
             <Table id="ActiveItem" className="table table-stripe">
               <tbody>
                 {this.state.QUEUE_HDR.map(board =>
                   <tr key={board.QUEUE_NO} >
-                    <td>{board.QUEUE_NO}</td>
+                    <td className="keyItem"><input type="text" id="keyID" value={this.state.activeQueue} onChange={this.onChange}/></td>
                     <td className="hidden">{board.BRANCH_CODE}</td>
                     <td className="hidden">{board.STATUS}</td>
                     <td>

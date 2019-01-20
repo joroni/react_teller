@@ -110,6 +110,9 @@ class Edit extends Component {
     localStorage.setItem("queue_No", QUEUE_NO);
     if (STATUS !== 'PENDING'){
     localStorage.setItem("hasActive", 'YES');
+    } else {
+      localStorage.setItem("queue_No", '');
+      localStorage.setItem("hasActive", 'NO');
     }
     })
     .catch((error) => {

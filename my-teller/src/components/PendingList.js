@@ -4,7 +4,7 @@ import '../App.css';
 import firebase from '../Firebase';
 
 //import 'typeface-roboto';
-import Icon from '@material-ui/core/Icon';
+//import Icon from '@material-ui/core/Icon';
 import Table from '@material-ui/core/Table';
 
 
@@ -132,7 +132,7 @@ class PendingList extends Component {
                     <td className="QueueNo">{board.QUEUE_NO}</td>
                     <td className="hidden">{board.BRANCH_CODE}</td>
                     <td className="hidden">{board.STATUS}</td>
-                    <td><Link onClick={this.handleClick}  value={board.QUEUE_NO} to={`/edit/${board.key}`} className="btn btn-success" style={{ display: this.handleCheck }}>Serve</Link></td>
+                    <td><Link onClick={this.handleClick}  value={board.QUEUE_NO} to={`/edit/${board.key}`} className="btn btn-success" >Serve</Link></td>
                   </tr>
                 )}
               </tbody>

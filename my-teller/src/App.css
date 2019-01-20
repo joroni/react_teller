@@ -13,8 +13,12 @@ body, html {
 }
 
 .QueueNo {
-  font-size: 2em;
+  font-size: 1.8rem;
+  color: #888;
 }
+
+
+
 .App {
   text-align: center;
   font-family: "Roboto", sans-serif;
@@ -72,16 +76,25 @@ body, html {
   width: 200px;
 }
 
-
+.label {
+  color:#ddd;
+}
 .hidden{
   display:none !important;
 }
 
+#PendingList tr td:last-child a.btn {
+  display:none;
+}
 
+#PendingList tr:first-child td:last-child a.btn {
+  display:block;
+}
+/*
 #PendingList tbody tr:first-child > td:last-child > a.btn, #ActiveItem tbody tr:first-child > td:last-child > a.btn{
   display:block !important;
 }
-
+*/
 
 table#PendingList {
   display: inline-flex;
@@ -90,6 +103,12 @@ table#PendingList {
 table#PendingList td:first-child {
   min-width: 145px;
 }
+
+
+table#PendingList tr:first-child td.QueueNo {
+  color: #333;
+}
+
 
 #HoldingList tr td {
   background: rgba(48, 50, 56);
@@ -124,10 +143,19 @@ table#PendingList td:first-child {
   color: #fff;
 }
 
+table#ActiveItem1 td, .table th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 1px solid #FF3A3A; ;
+}
+
+.keyItem {
+  color: rgb(254,1,1) !important;
+}
 
 .QueueNoHold {
-  color: rgba(255,255,255,0.5);
-  font-size: 2rem;
+  color: rgba(255,255,255,0.5) !important;
+  font-size: 1.2rem;
 }
 
 a.unHoldBtn {
