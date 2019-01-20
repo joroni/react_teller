@@ -23,7 +23,7 @@ class Edit extends Component {
    // alert(activeOne);
     if (activeOne === 'YES') {
         alert('Empty your Active item first');
-        this.disabled = true
+       // this.disabled = true
         return false;
        // document.querySelector('.serveBtn').prop("disabled", true);
       } else {
@@ -107,6 +107,10 @@ class Edit extends Component {
       });
      // this.props.history.push("/show/"+this.props.match.params.id)
     this.props.history.push("/");
+    localStorage.setItem("queue_No", QUEUE_NO);
+    if (STATUS !== 'PENDING'){
+    localStorage.setItem("hasActive", 'YES');
+    }
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -132,7 +136,7 @@ class Edit extends Component {
             <form onSubmit={this.onSubmit} className="text-centered"> 
               <div class="form-group hidden">
                 <label for="title">QUEUE_NO:</label>
-                <input type="text" readOnly class="form-control" name="QUEUE_NO" value={this.state.QUEUE_NO} onChange={this.onChange} placeholder="QUEUE_NO" />
+                <input type="text" readOnly class="form-control" id="QUEUE_NUMBER" name="QUEUE_NO" value={this.state.QUEUE_NO} onChange={this.onChange} placeholder="QUEUE_NO" />
               </div>
               <div class="form-group hidden">
                 <label for="BRANCH_CODE">BRANCH_CODE:</label>

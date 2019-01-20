@@ -11,7 +11,7 @@ import Table from '@material-ui/core/Table';
 class PendingList extends Component {
   constructor(props) {
     super(props);
-   // this.handleClick = this.handleClick.bind(this);
+   this.handleClick = this.handleClick.bind(this);
     this.ref = firebase.firestore().collection('QUEUE_HDR').where("STATUS", "==", "PENDING").where("BRANCH_CODE", "==", "PBCOM001");
     this.unsubscribe = null;
     this.state = {
@@ -33,7 +33,7 @@ class PendingList extends Component {
 
   checkActive(){
     let hasActiveItem =localStorage.getItem("hasActive");
-  if(hasActiveItem === ""){
+    if(hasActiveItem === ""){
     alert('Multiple items is not allowed at same time')
     return false;
     } else{
@@ -42,14 +42,14 @@ class PendingList extends Component {
   }
 
   limitActiveToOne() {
-    const activeOne = localStorage.getItem("hasActive");
+    let activeOne = localStorage.getItem("hasActive");
    // alert(activeOne);
     if (activeOne === 'YES') {
        alert('Empty your Active item first');
        this.handleCheck ='none'
        // return false;
       // document.querySelector('.serveBtn').prop("disabled", true);
-      } else {
+      } else if (activeOne === 'NO')  {
        // this.prop("disabled", false);
        this.handleCheck ='block'
       return true;
@@ -58,7 +58,7 @@ class PendingList extends Component {
   
   componentDidUpdate() {
   //this.checkActive();
-  this.limitActiveToOne();
+  //this.limitActiveToOne();
   }
   
 
@@ -94,8 +94,16 @@ class PendingList extends Component {
   handleClick = e => {
     const buttonValue = e.target.value;
     console.log(buttonValue);
-    localStorage.setItem("setAs","ACTIVE" );
-    localStorage.setItem("hasActive", 'YES' );
+    var x = document.getElementById("ActiveItem").rows.length;
+    console.log(x);
+    if (x === 0){
+      localStorage.setItem("setAs","ACTIVE" );
+      localStorage.setItem("hasActive", 'NO' );
+    }else {
+      localStorage.setItem("setAs","PENDING" );
+      localStorage.setItem("hasActive", 'YES' );
+    }
+  
 }
   
 
@@ -121,10 +129,10 @@ class PendingList extends Component {
               <tbody>
                 {this.state.QUEUE_HDR.map(board =>
                   <tr key={board.QUEUE_NO} className="ACTIVE">
-                    <td className="QueueNo"><Link className="serveBtn" to={`/edit/${board.key}`}>{board.QUEUE_NO}</Link></td>
+                    <td className="QueueNo">{board.QUEUE_NO}</td>
                     <td className="hidden">{board.BRANCH_CODE}</td>
                     <td className="hidden">{board.STATUS}</td>
-                    <td><Link onClick={this.handleClick}  value="ACTIVE" to={`/edit/${board.key}`} className="btn btn-success" style={{ display: this.handleCheck }}>Serve</Link></td>
+                    <td><Link onClick={this.handleClick}  value={board.QUEUE_NO} to={`/edit/${board.key}`} className="btn btn-success" style={{ display: this.handleCheck }}>Serve</Link></td>
                   </tr>
                 )}
               </tbody>

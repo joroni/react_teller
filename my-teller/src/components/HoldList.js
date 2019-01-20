@@ -19,12 +19,29 @@ class HoldList extends Component {
    
   }
 
+
+  
   recallClick = e => {
+    const buttonValue = e.target.value;
+    console.log(buttonValue);
+    var x = document.getElementById("ActiveItem").rows.length;
+    console.log(x);
+    if (x === 0){
+      localStorage.setItem("setAs","ACTIVE" );
+      localStorage.setItem("hasActive", 'NO' );
+    }else {
+      localStorage.setItem("setAs","HOLD" );
+      localStorage.setItem("hasActive", 'YES' );
+    }
+  }
+  
+/*
+  recallClickX = e => {
     const buttonValue = e.target.value;
     console.log(buttonValue);
     localStorage.setItem("setAs","ACTIVE" );
     localStorage.setItem("hasActive", 'YES' );
-  }
+  }*/
   
   onCollectionUpdate = (querySnapshot) => {
     const QUEUE_HDR = [];
@@ -77,14 +94,14 @@ class HoldList extends Component {
           </div>
           <div className="panel-body">
             <h4 className="hidden"><Link to="/create" className="btn btn-primary">Add</Link></h4>
-            <Table id="PendingList" className="table table-stripe">
+            <Table id="HoldingList" className="table table-stripe">
               <tbody>
                 {this.state.QUEUE_HDR.map(board =>
                   <tr  key={board.QUEUE_NO}  className={board.QUEUE_NO}>
-                    <td><Link to={`/edit/${board.key}`}>{board.QUEUE_NO}</Link></td>
+                    <td className="QueueNoHold">{board.QUEUE_NO}</td>
                     <td className="hidden">{board.BRANCH_CODE}</td>
                     <td className="hidden">{board.STATUS} </td>
-                   <td> <Link to={`/edit/${board.key}`} type="button" onClick={this.recallClick} value="ACTIVE" className="serveBtn btn btn-success btn btn-secondary">ReCall</Link></td>
+                   <td> <Link to={`/edit/${board.key}`} type="button" onClick={this.recallClick} value="ACTIVE" className="unHoldBtn btn btn-success btn btn-secondary">ReCall</Link></td>
                   </tr>
                 )}
               </tbody>
