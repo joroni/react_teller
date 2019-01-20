@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Link, Label } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../App.css';
 import firebase from '../Firebase';
 //import 'typeface-roboto';
-import Icon from '@material-ui/core/Icon';
+//import Icon from '@material-ui/core/Icon';
 import Table from '@material-ui/core/Table';
 
 
@@ -14,7 +14,11 @@ class ActiveJoined extends Component {
 
   constructor(props) {
     super(props);
-    let QUEUE_SELECTED = localStorage.getItem("queue_No");
+   // let QUEUE_SELECTED = localStorage.getItem("queue_No");
+   //const QUEUE_SELECTED = document.getElementById('keyID').value;
+   const QUEUE_SELECTED = localStorage.getItem("queue_No");
+   console.log(QUEUE_SELECTED);
+    this.onChange = this.onChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.ref = firebase.firestore().collection('QUEUE_DTL').where("QUEUE_NO", "==", QUEUE_SELECTED);
     this.unsubscribe = null;
@@ -41,6 +45,12 @@ class ActiveJoined extends Component {
   }
 
 
+  onChange = (e) => {
+    const state = this.state
+    state[e.target.name] = e.target.value;
+    this.setState({activeQueue:state});
+    console.log(this.activeQueue);
+  }
 
 
   handleClick = e => {
@@ -56,13 +66,18 @@ class ActiveJoined extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const QUEUE_DTL = [];
     querySnapshot.forEach((doc) => {
-      const { QUEUE_NO, ACCOUNT, AMOUNT } = doc.data();
+      const { QUEUE_NO, ACCOUNT,ACCOUNT_NAME, AMOUNT, TRANS_TYPE, CURRENCY, SCHED_DATE, SCHED_TIME } = doc.data();
       QUEUE_DTL.push({
         key: doc.id,
         doc, // DocumentSnapshot
         QUEUE_NO,
         ACCOUNT,
+        ACCOUNT_NAME,
         AMOUNT,
+        TRANS_TYPE,
+        CURRENCY,
+        SCHED_DATE,
+        SCHED_TIME
       });
     });
     this.setState({
@@ -72,13 +87,12 @@ class ActiveJoined extends Component {
 
 
 
-  componentWillUnmount(){
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-  }
+ 
   componentDidMount() {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
     //  this.QUEUE_NO = localStorage.getItem("ThisQueueNo");
     //  alert(this.QUEUE_NO);
+    //window.location.reload();
   }
 
   render() {
@@ -98,12 +112,19 @@ class ActiveJoined extends Component {
 
                   <tr>
                     <td className="label">QUEUE NO:</td><td>{board.QUEUE_NO}</td>
+                    <td className="label">ACCOUNT NAME:</td><td>{board.ACCOUNT_NAME}</td>
                   </tr>
                   <tr>
-                  <td className="label">ACCOUNT</td><td>{board.ACCOUNT}</td>
+                  <td className="label">ACCOUNT:</td><td>{board.ACCOUNT}</td>
+                  <td className="label">AMOUNT:</td><td>{board.AMOUNT}</td>
                   </tr>
                   <tr>
-                  <td className="label">AMOUNT</td><td>{board.AMOUNT}</td>
+                  <td className="label">TRANS TYPE:</td><td>{board.TRANS_TYPE}</td>
+                  <td className="label">CURRENCY</td><td>{board.CURRENCY}</td>
+                  </tr>
+                  <tr>
+                  <td className="label">SCHED_DATE:</td><td>{board.SCHED_DATE}</td>
+                  <td className="label">SCHED_TIME:</td><td>{board.SCHED_TIME}</td>
                   </tr>
 
 

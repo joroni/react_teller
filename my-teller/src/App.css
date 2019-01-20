@@ -5,11 +5,13 @@
   -webkit-overflow-scrolling: touch;
   background-color: #f7f7f7;
   opacity: 1 !important;
+  background: url(./login-background.jpg) no-repeat center center #fff;
+  background-size:cover;
 }
-
 
 body, html {
   font-family: "Roboto", sans-serif;
+ 
 }
 
 .QueueNo {
@@ -142,10 +144,14 @@ table#PendingList tr:first-child td.QueueNo {
   background: rgb(254,1,1);
   color: #fff;
 }
-
+.table .table {
+  background: none;
+}
 table#ActiveItem1 td, .table th {
   padding: .75rem;
   vertical-align: top;
+  background: none;
+  background-color: transparent;
   border-top: 1px solid #FF3A3A; ;
 }
 

@@ -66,9 +66,6 @@ class Edit extends Component {
 }
   
 
-
-
-    
     
 
   updateVal = (e) => {
@@ -138,19 +135,19 @@ class Edit extends Component {
             <h4 className="hidden"><Link to="/" className="btn btn-primary">Board List</Link></h4>
             <form onSubmit={this.onSubmit} className="text-centered"> 
               <div className="form-group hidden">
-                <label for="title">QUEUE_NO:</label>
+               
                 <input type="text" readOnly className="form-control" id="QUEUE_NUMBER" name="QUEUE_NO" value={this.state.QUEUE_NO} onChange={this.onChange} placeholder="QUEUE_NO" />
               </div>
               <div className="form-group hidden">
-                <label for="BRANCH_CODE">BRANCH_CODE:</label>
+               
                 <input type="text" readOnly className="form-control" name="BRANCH_CODE" value={this.state.BRANCH_CODE} onChange={this.onChange} placeholder="BRANCH_CODE" />
               </div>
               <div className="form-group hidden">
-                <label for="STATUS">STATUS:</label>
+               
                 <input type="text" className="form-control" name="STATUS" value={this.state.STATUS} onChange={this.onChange} placeholder="STATUS" />
               </div>
               <Link to="/" className="btn btn-primary">Cancel</Link>
-              &nbsp; <button type="submit" disabled={this.disabled} className="btn btn-success">OK</button>
+              &nbsp; <button type="submit"  disabled={this.disabled} className="btn btn-success">OK</button>
             </form>
           </div>
         </div>

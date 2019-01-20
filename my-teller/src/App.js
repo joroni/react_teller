@@ -4,7 +4,7 @@ import './App.css';
 import firebase from './Firebase';
 import HoldList from './components/HoldList';
 import ActiveList from './components/ActiveList';
-import ActiveJoined from './components/ActiveJoined';
+//import ActiveJoined from './components/ActiveJoined';
 //import FormDialog from './components/FormDialog';
 //import Button from '@material-ui/core/Button';
 //import CustomizedTable from './components/CustomizedTable';
@@ -81,7 +81,7 @@ class App extends Component {
       
       <div className="container">
        <header>
-<h2>Teller</h2>
+<h2 className="branding"><img src="./logo.png" /></h2>
 
         </header>
         <div className="contents">

@@ -11,7 +11,7 @@ import ActiveJoined from './ActiveJoined';
 class ActiveList extends Component {
   constructor(props) {
     super(props);
-    //this.activeQueue = this.activeQueue.bind(this);
+   // this.activeQueue = this.activeQueue.bind(this);
     this.returnClick = this.returnClick.bind(this);
     this.holdClick = this.holdClick.bind(this);
     this.doneClick = this.doneClick.bind(this);
@@ -80,6 +80,10 @@ class ActiveList extends Component {
 
   componentWillUnmount(){
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+    // eslint-disable-next-line react/no-direct-mutation-state
+    this.state = {
+      QUEUE_HDR: []
+    };
   }
  
 
@@ -89,7 +93,6 @@ class ActiveList extends Component {
 
   render() {
     return (
-    
       <div className="container ActiveContainer">
         <div className="panel panel-default">
           <div className="panel-heading hidden">
@@ -99,13 +102,18 @@ class ActiveList extends Component {
           </div>
           <div className="panel-body">
             <h4 className="hidden"><Link to="/create" className="btn btn-primary">Add</Link></h4>
-            <div>  <ActiveJoined/></div>
           
             <Table id="ActiveItem" className="table table-stripe">
-              <tbody>
+              
                 {this.state.QUEUE_HDR.map(board =>
-                  <tr key={board.QUEUE_NO} >
-                    <td className="keyItem"><input type="text" id="keyID" value={this.state.activeQueue} onChange={this.onChange}/></td>
+                <tbody  key={board.QUEUE_NO}>
+                 <tr>
+                   <td colSpan="2">
+                   <ActiveJoined/>
+                   </td>
+                 </tr>
+                  <tr>
+                    <td className="keyItem"><input type="hidden" id="keyID" value={this.state.activeQueue} onChange={this.onChange}/></td>
                     <td className="hidden">{board.BRANCH_CODE}</td>
                     <td className="hidden">{board.STATUS}</td>
                     <td>
@@ -118,8 +126,9 @@ class ActiveList extends Component {
                         </div>
                     </td>
                   </tr>
+                  </tbody>
                 )}
-              </tbody>
+              
             </Table>
           </div>
         </div>
