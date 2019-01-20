@@ -10,17 +10,23 @@ import ActiveList from './components/ActiveList';
 //import CustomizedTable from './components/CustomizedTable';
 //import Paper from './components/Paper';
 //import FullWidthGrid from './components/FullWidthGrid';
+// using an ES6 transpiler, like babel
+import Img from 'react-image';
+ 
 import PendingList from './components/PendingList';
 
 class App extends Component {
   constructor(props) {
     super(props);
    // this.handleClick = this.handleClick.bind(this);
+   // otherwise
+    let Img = require('react-image');
+    const myLogo = () => <Img src="./logo.png" />
     this.ref = firebase.firestore().collection('QUEUE_HDR').where("STATUS", "==", "PENDING");
     this.unsubscribe = null;
     this.state = {
       QUEUE_HDR: [],
-      id: ''
+      id: '',
     };
   }
 
@@ -81,7 +87,7 @@ class App extends Component {
       
       <div className="container">
        <header>
-<h2 className="branding"><img src="./logo.png" /></h2>
+<h2 className="branding"><myLogo/></h2>
         </header>
         <div className="contents">
         <div className="row">
