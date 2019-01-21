@@ -1,0 +1,9 @@
+clone this repo
+
+cd react_teller/my-teller
+
+yarn add mdbreact
+or 
+npm install --save mdbreact
+
+npm start
