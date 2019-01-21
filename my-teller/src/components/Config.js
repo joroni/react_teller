@@ -61,6 +61,7 @@ class Config extends Component {
 localStorage.setItem("brnch_code", brchCde);
 
 localStorage.setItem("counter_no", cnterNo);
+this.props.history.push("/");
   }
 
   

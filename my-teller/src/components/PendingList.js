@@ -11,8 +11,11 @@ import Table from '@material-ui/core/Table';
 class PendingList extends Component {
   constructor(props) {
     super(props);
+    const brchCde= localStorage.getItem("brnch_code");
+
+   const cnterNo= localStorage.getItem("counter_no");
    this.handleClick = this.handleClick.bind(this);
-    this.ref = firebase.firestore().collection('QUEUE_HDR').where("STATUS", "==", "PENDING").where("BRANCH_CODE", "==", "PBCOM001");
+    this.ref = firebase.firestore().collection('QUEUE_HDR').where("STATUS", "==", "PENDING").where("BRANCH_CODE", "==", brchCde);
     this.unsubscribe = null;
     this.state = {
       QUEUE_HDR: [],
