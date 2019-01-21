@@ -1,5 +1,9 @@
 clone this repo
 
+git clone https://github.com/joroni/react_teller.git
+
+on terminal type:
+
 cd react_teller/my-teller
 
 yarn add mdbreact
