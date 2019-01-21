@@ -7,6 +7,7 @@
   opacity: 1 !important;
   background: url(./login-background.jpg) no-repeat center center #fff;
   background-size:cover;
+  background-attachment: fixed;
 }
 
 body, html {
@@ -14,6 +15,38 @@ body, html {
  
 }
 
+.pdt-100 {
+  padding-top:100px;
+}
+.branding > img {
+    height: 45px;
+    margin-top: -10px;
+    width: auto;
+}
+
+.nav-right{
+  right: 10px;
+  position: absolute
+}
+.nav-right ul li{
+list-style: none;
+float: left;
+}
+
+.border-light {
+  border-color: #e0e0e0!important;
+}
+.p-5 {
+  padding: 3rem!important;
+  max-width: 500px;
+  background:#fff;
+  margin:0 auto;
+}
+
+#sortable-form li {
+  list-style: none;
+  padding-bottom: 10px;
+}
 .QueueNo {
   font-size: 1.8rem;
   color: #888;
@@ -50,6 +83,17 @@ body, html {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+
+.btn-icon.btn-config{
+  /*background:url(./setup.svg) no-repeat center transparent;*/
+  background-size: cover;
+  margin-left:40px;
+}
+.btn-config img {
+  width:20px;
+  height:20px;
 }
 
 .App-link {
@@ -176,6 +220,7 @@ header {
   top:0;
   left:0;
   width: 100%;
+  display: inline-flex;
   height:50px;
   background: rgb(254,1,1);
   color: #fff;

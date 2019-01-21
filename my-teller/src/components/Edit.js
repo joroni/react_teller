@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from '../Firebase';
 import { Link } from 'react-router-dom';
+//import { Timestamp } from '@firebase/firestore-types';
 
 class Edit extends Component {
 
@@ -66,6 +67,27 @@ class Edit extends Component {
 }
   
 
+processActive = (e) => {
+  //const state = this.state
+  const timestamp = Date.now(); // This would be the timestamp you want to format
+  this.myCounter = localStorage.getItem("MYCounter");
+  function myTrim(x) {
+    return x.replace(/^\s+|\s+$/gm,'');
+  }
+  
+ 
+  const timeNow=myTrim(new Intl.DateTimeFormat('en-US', {year: 'numeric',month: '2-digit',day: '2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).format(timestamp));
+  this.setState({
+    QUEUE_NO: this.state,
+    ACCOUNT:this.state.ACCOUNT,
+    ACCOUNT_NAME:this.state.ACCOUNT_NAME,
+    BRANCH_CODE: this.state.BRANCH_CODE,
+    COUNTER_NO: this.myCounter,
+    TIME_ACTIVE: timeNow
+  });
+  this.props.history.push("/createactive?queue="+this.state.QUEUE_NO+"&branch="+this.state.BRANCH_CODE+"&account="+this.state.ACCOUNT+"&acname="+this.state.ACCOUNT_NAME+"&counter="+this.myCounter+"&time="+timeNow);
+ 
+}
     
 
   updateVal = (e) => {
@@ -96,26 +118,29 @@ class Edit extends Component {
       BRANCH_CODE,
       STATUS
     }).then((docRef) => {
-      this.setState({
-        key: '',
-        QUEUE_NO: '',
-        BRANCH_CODE: '',
-        STATUS: ''
-      });
+     
+      
      // this.props.history.push("/show/"+this.props.match.params.id)
-    this.props.history.push("/");
+   // this.props.history.push("/createactive?");
     localStorage.setItem("queue_No", QUEUE_NO);
     if (STATUS !== 'PENDING'){
     localStorage.setItem("hasActive", 'YES');
+      
     } else {
       localStorage.setItem("queue_No", '');
       localStorage.setItem("hasActive", 'NO');
+      
     }
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
+
+    this.processActive();
   }
+
+
+  
 
 
 
@@ -147,7 +172,7 @@ class Edit extends Component {
                 <input type="text" className="form-control" name="STATUS" value={this.state.STATUS} onChange={this.onChange} placeholder="STATUS" />
               </div>
               <Link to="/" className="btn btn-primary">Cancel</Link>
-              &nbsp; <button type="submit"  disabled={this.disabled} className="btn btn-success">OK</button>
+              &nbsp; <button type="submit" disabled={this.disabled} className="btn btn-success">OK</button>
             </form>
           </div>
         </div>

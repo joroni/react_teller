@@ -100,7 +100,7 @@ class ActiveList extends Component {
               SERVING
             </h3>
           </div>
-          <div className="panel-body">
+          <div className="panel-body responsive-table">
             <h4 className="hidden"><Link to="/create" className="btn btn-primary">Add</Link></h4>
           
             <Table id="ActiveItem" className="table table-stripe">

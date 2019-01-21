@@ -11,23 +11,28 @@ import ActiveList from './components/ActiveList';
 //import Paper from './components/Paper';
 //import FullWidthGrid from './components/FullWidthGrid';
 // using an ES6 transpiler, like babel
+import Table from 'rc-table';
 import Img from 'react-image';
  
 import PendingList from './components/PendingList';
+
 
 class App extends Component {
   constructor(props) {
     super(props);
    // this.handleClick = this.handleClick.bind(this);
    // otherwise
+   
     let Img = require('react-image');
-    const myLogo = () => <Img src="./logo.png" />
+    const myLogo = () => <Img src="https://github.com/joroni/react_teller/blob/master/my-teller/src/logo.png" />
     this.ref = firebase.firestore().collection('QUEUE_HDR').where("STATUS", "==", "PENDING");
     this.unsubscribe = null;
     this.state = {
       QUEUE_HDR: [],
       id: '',
+      MYCounter:0
     };
+   
   }
 
 /*
@@ -46,10 +51,14 @@ class App extends Component {
   }
 */
   onCollectionUpdate = (querySnapshot) => {
+   // this.MYCounter = document.getElementById('myCounter').value;
+    this.MYCounter = localStorage.getItem("counter_no");
+    localStorage.setItem("MYCounter", this.MYCounter);
     const QUEUE_HDR = [];
     querySnapshot.forEach((doc) => {
-      const { QUEUE_NO, BRANCH_CODE, STATUS } = doc.data();
+      const { QUEUE_NO, BRANCH_CODE, STATUS, MYCounter } = doc.data();
       QUEUE_HDR.push({
+        MYCounter:this.MYCounter,
         key: doc.id,
         doc, // DocumentSnapshot
         QUEUE_NO,
@@ -66,7 +75,11 @@ class App extends Component {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
   }
 
-
+  onChangeCounter(){
+    const myCounter = document.getElementById('myCounter').value;
+    localStorage.setItem('MYCounter',myCounter);
+   const MYCounter = localStorage.getItem("MYCounter");
+  }
   componentDidMount() {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
     //this.limitActiveToOne();
@@ -87,7 +100,13 @@ class App extends Component {
       
       <div className="container">
        <header>
-<h2 className="branding"><myLogo/></h2>
+          <div className="branding"><img src="./pbcom-logo-transparent.png" /></div>
+          <div className="nav-right">
+          <ul>
+            <li>Counter: &nbsp;{this.MYCounter}</li>
+          <li><div className="config"><Link to="/config" className="btn-icon btn-config"><img src="./setup.svg" /></Link></div></li>
+          </ul>
+          </div>
         </header>
         <div className="contents">
         <div className="row">

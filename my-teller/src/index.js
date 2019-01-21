@@ -7,6 +7,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Edit from './components/Edit';
 import Create from './components/Create';
+import CreateActive from './components/CreateActive';
+import Config from './components/Config';
+
 import Show from './components/Show';
 
 ReactDOM.render(
@@ -15,6 +18,8 @@ ReactDOM.render(
         <Route exact path='/' component={App} />
         <Route path='/edit/:id' component={Edit} />
         <Route path='/create' component={Create} />
+        <Route path='/createactive' component={CreateActive} />
+         <Route path='/config' component={Config} />
         <Route path='/show/:id' component={Show} />
        
       </div>
