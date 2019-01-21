@@ -122,13 +122,15 @@ processActive = (e) => {
       
      // this.props.history.push("/show/"+this.props.match.params.id)
    // this.props.history.push("/createactive?");
-    localStorage.setItem("queue_No", QUEUE_NO);
-    if (STATUS !== 'PENDING'){
-    localStorage.setItem("hasActive", 'YES');
+   // localStorage.setItem("queue_No", QUEUE_NO);
+    if (STATUS === 'PENDING'){
+    localStorage.setItem("hasActive", 'NO');
+    localStorage.setItem("queue_No", '');
       
-    } else {
-      localStorage.setItem("queue_No", '');
-      localStorage.setItem("hasActive", 'NO');
+    }   else {
+     
+      localStorage.setItem("queue_No", QUEUE_NO);
+      localStorage.setItem("hasActive", 'YES');
       
     }
     })
