@@ -33,9 +33,10 @@ class Config extends Component {
 
  onSubmit = (e) => {
     e.preventDefault();
-   var bc = localStorage.getItem("brnch_code");
-
-     var cn= localStorage.getItem("counter_no");
+  // var bc = localStorage.getItem("brnch_code");
+  var bc = localStorage.getItem("PBCOM001");
+  var cn= localStorage.getItem("1");
+    // var cn= localStorage.getItem("counter_no");
     const { BRANCH_CODE, COUNTER_NO} = this.state;
 
     this.ref.add({

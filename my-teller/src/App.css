@@ -266,4 +266,5 @@ header {
 .btn:hover,.btn:active, .btn:link{
   background:rgb(254,1,1) !important;
   border: 2px solid rgb(254,1,1);
+  color:#fff;
 }
